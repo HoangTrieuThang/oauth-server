@@ -1,0 +1,77 @@
+server:
+  port: 8888
+  contextPath: /auth
+security:
+  basic:
+    enable: false
+
+server.user.password: password
+
+security.oauth2.client:
+  clientId: acme
+  clientSecret: acmesecret
+  authorized-grant-types: authorization_code,refresh_token,implicit,password,client_credentials
+  scope: webshop
+
+spring:
+  datasource:
+    url: jdbc.mysql://35.247.152.191:3306/auth
+    username: self_growth_user
+    password: QuocAnhCanh
+    driver-class: com.mysql.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: false
+    hibernate:
+      ddl-auto: create
+
+logging.level:
+  root: WARN
+  org.springframework.security.oauth2: DEBUG
+  org.springframework.security.oauth2.config.annotation.web.configurers.FrameworkEndpointHandlerMapping: INFO
+  org.springframework.security.oauth2.provider.client.ClientCredentialsTokenGranter: DEBUG
+  org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter: DEBUG
+  org.springframework.security.oauth2.provider.code.AuthorizationCodeTokenGranter: DEBUG
+  org.springframework.security.oauth2.provider.implicit.ImplicitTokenGranter: DEBUG
+  org.springframework.security.oauth2.provider.approval.ApprovalStoreUserApprovalHandler: DEBUG
+  org.springframework.security.oauth2.provider.endpoint.TokenEndpoint: INFO
+  org.springframework.security.oauth2.provider.approval.AuthorizationEndpoint: INFO
+
+  # Set INFO to see the allocated port
+  org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer: INFO
+  org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainer: INFO
+
+  se.callista: INFO
+
+#eureka:
+#  instance:
+#    leaseRenewalIntervalInSeconds: 3
+#    metadataMap:
+#      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+#  client:
+#    # Default values comes from org.springframework.cloud.netflix.eurek.EurekaClientConfigBean
+#    registryFetchIntervalSeconds: 5
+#    instanceInfoReplicationIntervalSeconds: 5
+#    initialInstanceInfoReplicationIntervalSeconds: 5
+#
+#---
+## For deployment in Docker containers
+#spring:
+#  profiles: docker
+## Datasource and JPA configuration to be used for storing the OAuth authorization details
+## and token store
+#  datasource:
+#    url: jdbc:mysql://35.184.66.175:3306/auth
+#    username: root
+#    password: E5vKx9NS3LBA
+#    driver-class: com.mysql.jdbc.Driver
+#
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQLDialect
+#    show-sql: false
+#    hibernate:
+#      ddl-auto: create
+#
+server:
+ port: 8888
